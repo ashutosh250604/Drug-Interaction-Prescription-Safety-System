@@ -1,0 +1,640 @@
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-color: #007bff;
+  --primary-dark: #0056b3;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --light-bg: #f8f9fa;
+  --dark-text: #343a40;
+  --border-color: #dee2e6;
+  --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--dark-text);
+  background-color: var(--light-bg);
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar Styles */
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-icon {
+  font-size: 1.8rem;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--dark-text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--primary-color);
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+/* Main Content Wrapper */
+.main-content-wrapper {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  color: var(--secondary-color);
+}
+
+/* Page Content */
+.page-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .page-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--dark-text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group input:disabled,
+.form-group select:disabled,
+.form-group textarea:disabled {
+  background-color: var(--light-bg);
+  cursor: not-allowed;
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Drug Input Component */
+.drug-input-container {
+  padding: 1rem;
+}
+
+.input-section {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.input-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.drug-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.input-hint {
+  font-size: 0.875rem;
+  color: var(--secondary-color);
+  margin-top: 0.5rem;
+}
+
+.selected-drugs {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: var(--light-bg);
+  border-radius: 8px;
+}
+
+.selected-drugs h4 {
+  margin-bottom: 0.75rem;
+  color: var(--dark-text);
+}
+
+.drug-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.drug-tag {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.remove-drug {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.8;
+  padding: 0;
+  line-height: 1;
+}
+
+.remove-drug:hover {
+  opacity: 1;
+}
+
+.btn-check {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+/* Interaction Result Component */
+.interaction-result {
+  margin-top: 2rem;
+}
+
+.no-interactions {
+  text-align: center;
+  padding: 3rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  color: var(--success-color);
+  margin-bottom: 1rem;
+}
+
+.no-interactions h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--success-color);
+}
+
+.no-interactions .note {
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.result-header {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-text);
+}
+
+.interactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.interaction-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+  border-left: 4px solid;
+}
+
+.interaction-card.severity-high {
+  border-left-color: var(--danger-color);
+  background-color: #fff5f5;
+}
+
+.interaction-card.severity-medium {
+  border-left-color: var(--warning-color);
+  background-color: #fffcf0;
+}
+
+.interaction-card.severity-low {
+  border-left-color: var(--success-color);
+  background-color: #f0fff4;
+}
+
+.interaction-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.severity-icon {
+  font-size: 1.5rem;
+}
+
+.drug-pair {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.severity-badge {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.severity-label {
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.severity-label.severity-high {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.severity-label.severity-medium {
+  background-color: var(--warning-color);
+  color: var(--dark-text);
+}
+
+.severity-label.severity-low {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.severity-message {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+.interaction-description {
+  color: var(--dark-text);
+  line-height: 1.6;
+}
+
+.disclaimer {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #fff3cd;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: #856404;
+}
+
+/* Info Section */
+.info-section {
+  margin-top: 3rem;
+}
+
+.info-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--card-shadow);
+}
+
+.info-card h3 {
+  margin-bottom: 1rem;
+  color: var(--dark-text);
+}
+
+.severity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.severity-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+}
+
+.severity-item.severity-high {
+  background-color: #fff5f5;
+}
+
+.severity-item.severity-medium {
+  background-color: #fffcf0;
+}
+
+.severity-item.severity-low {
+  background-color: #f0fff4;
+}
+
+/* Drug List & Interaction List */
+.drug-list,
+.interaction-list {
+  list-style: none;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.drug-item,
+.interaction-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.drug-item:last-child,
+.interaction-item:last-child {
+  border-bottom: none;
+}
+
+.drug-info,
+.interaction-info {
+  flex: 1;
+}
+
+.drug-info p,
+.interaction-info p {
+  margin-top: 0.25rem;
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.interaction-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.loading,
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--secondary-color);
+}
+
+/* Messages */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.error-icon {
+  background-color: #dc3545;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.success-icon {
+  font-weight: bold;
+}
+
+/* Footer */
+.footer {
+  background-color: white;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--secondary-color);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-color);
+  margin-top: auto;
+}
+
+/* Home Page */
+.home-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark-text);
+}
