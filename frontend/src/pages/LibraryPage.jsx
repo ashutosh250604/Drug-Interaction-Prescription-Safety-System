@@ -27,6 +27,7 @@ function LibraryPage() {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const load = async () => {
     try {
@@ -83,6 +84,7 @@ function LibraryPage() {
       await interactionAPI.addInteraction(form);
       setMessage(`${form.drug1Name} + ${form.drug2Name} added to the library.`);
       setForm(EMPTY_FORM);
+      setIsFormOpen(false);
       await load();
     } catch (err) {
       setError(err.response?.data?.error || 'Could not save the interaction.');
@@ -205,9 +207,31 @@ function LibraryPage() {
         <section className="panel" aria-label="Add interaction">
           <div className="panel-head">
             <h2>Add a pair</h2>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              aria-expanded={isFormOpen}
+              aria-controls="add-pair-form"
+              onClick={() => setIsFormOpen((open) => !open)}
+            >
+              {isFormOpen ? 'Close' : 'New pair'}
+            </button>
           </div>
 
-          <form onSubmit={handleSubmit}>
+          {message && (
+            <p className="form-success" role="status">
+              {message}
+            </p>
+          )}
+
+          {!isFormOpen && (
+            <p className="panel-hint">
+              Record an interaction that is not in the library yet.
+            </p>
+          )}
+
+          {isFormOpen && (
+          <form id="add-pair-form" onSubmit={handleSubmit}>
             <div className="field">
               <label htmlFor="drug1Name">Drug A</label>
               <select
@@ -328,12 +352,6 @@ function LibraryPage() {
                 {error}
               </p>
             )}
-            {message && (
-              <p className="form-success" role="status">
-                {message}
-              </p>
-            )}
-
             <button
               type="submit"
               className="btn btn-primary btn-block"
@@ -344,6 +362,7 @@ function LibraryPage() {
               {isSaving ? 'Saving…' : 'Save interaction'}
             </button>
           </form>
+          )}
         </section>
       </div>
     </div>

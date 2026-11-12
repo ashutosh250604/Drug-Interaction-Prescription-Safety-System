@@ -1218,3 +1218,10 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+/* Virtualize the library list: off-screen rows skip layout and paint while
+   keeping their last measured height, so expanded rows stay correct. */
+.library-item {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
+}
