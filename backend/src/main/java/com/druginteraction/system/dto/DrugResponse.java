@@ -9,28 +9,27 @@ public class DrugResponse {
 
     private Long id;
     private String name;
+    private String drugClass;
     private String description;
 
-    // Default constructor
     public DrugResponse() {
     }
 
-    // Parameterized constructor
-    public DrugResponse(Long id, String name, String description) {
+    public DrugResponse(Long id, String name, String drugClass, String description) {
         this.id = id;
         this.name = name;
+        this.drugClass = drugClass;
         this.description = description;
     }
 
-    // Static factory method to create from entity
     public static DrugResponse fromEntity(Drug drug) {
         return new DrugResponse(
                 drug.getId(),
                 drug.getName(),
+                drug.getDrugClass(),
                 drug.getDescription());
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -45,6 +44,14 @@ public class DrugResponse {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDrugClass() {
+        return drugClass;
+    }
+
+    public void setDrugClass(String drugClass) {
+        this.drugClass = drugClass;
     }
 
     public String getDescription() {

@@ -13,31 +13,38 @@ public class InteractionResponse {
     private String drug2;
     private Severity severity;
     private String description;
+    private String mechanism;
+    private String management;
+    private String evidence;
 
-    // Default constructor
     public InteractionResponse() {
     }
 
-    // Parameterized constructor
-    public InteractionResponse(Long id, String drug1, String drug2, Severity severity, String description) {
+    public InteractionResponse(Long id, String drug1, String drug2, Severity severity,
+                               String description, String mechanism, String management,
+                               String evidence) {
         this.id = id;
         this.drug1 = drug1;
         this.drug2 = drug2;
         this.severity = severity;
         this.description = description;
+        this.mechanism = mechanism;
+        this.management = management;
+        this.evidence = evidence;
     }
 
-    // Static factory method to create from entity
     public static InteractionResponse fromEntity(Interaction interaction) {
         return new InteractionResponse(
                 interaction.getId(),
                 interaction.getDrug1().getName(),
                 interaction.getDrug2().getName(),
                 interaction.getSeverity(),
-                interaction.getDescription());
+                interaction.getDescription(),
+                interaction.getMechanism(),
+                interaction.getManagement(),
+                interaction.getEvidence());
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -76,5 +83,29 @@ public class InteractionResponse {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getMechanism() {
+        return mechanism;
+    }
+
+    public void setMechanism(String mechanism) {
+        this.mechanism = mechanism;
+    }
+
+    public String getManagement() {
+        return management;
+    }
+
+    public void setManagement(String management) {
+        this.management = management;
+    }
+
+    public String getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(String evidence) {
+        this.evidence = evidence;
     }
 }

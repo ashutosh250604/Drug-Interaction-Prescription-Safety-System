@@ -7,7 +7,9 @@ import jakarta.validation.constraints.Size;
 
 /**
  * Entity representing an interaction between two drugs.
- * Contains information about the severity and description of the interaction.
+ * Besides the severity label, each record can explain the pharmacology
+ * (mechanism), the recommended action (management) and how solid the evidence
+ * is.
  */
 @Entity
 @Table(name = "interaction")
@@ -37,16 +39,31 @@ public class Interaction {
     @Column(name = "description", length = 1000)
     private String description;
 
+    @Size(max = 1000, message = "Mechanism must not exceed 1000 characters")
+    @Column(name = "mechanism", length = 1000)
+    private String mechanism;
+
+    @Size(max = 1000, message = "Management must not exceed 1000 characters")
+    @Column(name = "management", length = 1000)
+    private String management;
+
+    @Size(max = 40, message = "Evidence must not exceed 40 characters")
+    @Column(name = "evidence", length = 40)
+    private String evidence;
+
     // Default constructor required by JPA
     public Interaction() {
     }
 
-    // Parameterized constructor
-    public Interaction(Drug drug1, Drug drug2, Severity severity, String description) {
+    public Interaction(Drug drug1, Drug drug2, Severity severity, String description,
+                       String mechanism, String management, String evidence) {
         this.drug1 = drug1;
         this.drug2 = drug2;
         this.severity = severity;
         this.description = description;
+        this.mechanism = mechanism;
+        this.management = management;
+        this.evidence = evidence;
     }
 
     // Getters and Setters
@@ -90,6 +107,30 @@ public class Interaction {
         this.description = description;
     }
 
+    public String getMechanism() {
+        return mechanism;
+    }
+
+    public void setMechanism(String mechanism) {
+        this.mechanism = mechanism;
+    }
+
+    public String getManagement() {
+        return management;
+    }
+
+    public void setManagement(String management) {
+        this.management = management;
+    }
+
+    public String getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(String evidence) {
+        this.evidence = evidence;
+    }
+
     @Override
     public String toString() {
         return "Interaction{" +
@@ -97,7 +138,6 @@ public class Interaction {
                 ", drug1=" + (drug1 != null ? drug1.getName() : "null") +
                 ", drug2=" + (drug2 != null ? drug2.getName() : "null") +
                 ", severity=" + severity +
-                ", description='" + description + '\'' +
                 '}';
     }
 }

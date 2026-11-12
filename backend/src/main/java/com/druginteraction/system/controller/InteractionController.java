@@ -1,6 +1,7 @@
 package com.druginteraction.system.controller;
 
 import com.druginteraction.system.dto.CheckInteractionRequest;
+import com.druginteraction.system.dto.InteractionCheckResponse;
 import com.druginteraction.system.dto.InteractionRequest;
 import com.druginteraction.system.dto.InteractionResponse;
 import com.druginteraction.system.entity.Severity;
@@ -29,24 +30,33 @@ public class InteractionController {
     }
 
     /**
-     * Get all interactions.
+     * Get all interactions, most severe first.
      * GET /api/interactions
      */
     @GetMapping("/interactions")
     public ResponseEntity<List<InteractionResponse>> getAllInteractions() {
-        List<InteractionResponse> interactions = interactionService.getAllInteractions();
-        return ResponseEntity.ok(interactions);
+        return ResponseEntity.ok(interactionService.getAllInteractions());
     }
 
     /**
      * Get interactions by severity.
-     * GET /api/interactions?severity=HIGH
+     * GET /api/interactions/by-severity?severity=HIGH
      */
     @GetMapping("/interactions/by-severity")
     public ResponseEntity<List<InteractionResponse>> getInteractionsBySeverity(
             @RequestParam Severity severity) {
-        List<InteractionResponse> interactions = interactionService.getInteractionsBySeverity(severity);
-        return ResponseEntity.ok(interactions);
+        return ResponseEntity.ok(interactionService.getInteractionsBySeverity(severity));
+    }
+
+    /**
+     * Search the reference library.
+     * GET /api/interactions/filter?q=bleeding&severity=HIGH
+     */
+    @GetMapping("/interactions/filter")
+    public ResponseEntity<List<InteractionResponse>> filterInteractions(
+            @RequestParam(required = false) String q,
+            @RequestParam(required = false) Severity severity) {
+        return ResponseEntity.ok(interactionService.searchInteractions(q, severity));
     }
 
     /**
@@ -92,33 +102,13 @@ public class InteractionController {
     /**
      * Check drug interactions (MAIN FEATURE).
      * POST /api/check
-     * 
-     * Compares all possible pairs of the given drugs and returns
-     * any known interactions between them.
-     * 
-     * Request body:
-     * {
-     * "drugs": ["DrugA", "DrugB", "DrugC"]
-     * }
-     * 
-     * Response:
-     * [
-     * {
-     * "drug1": "DrugA",
-     * "drug2": "DrugB",
-     * "severity": "HIGH",
-     * "description": "Severe interaction"
-     * }
-     * ]
+     *
+     * Returns pairwise interactions sorted HIGH to LOW, the resolved and
+     * unresolved names, and any classes that appear twice in the regimen.
      */
     @PostMapping("/check")
-    public ResponseEntity<?> checkInteractions(@Valid @RequestBody CheckInteractionRequest request) {
-        try {
-            List<InteractionResponse> interactions = interactionService.checkInteractions(request);
-            return ResponseEntity.ok(interactions);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest()
-                    .body(Map.of("error", e.getMessage()));
-        }
+    public ResponseEntity<InteractionCheckResponse> checkInteractions(
+            @Valid @RequestBody CheckInteractionRequest request) {
+        return ResponseEntity.ok(interactionService.checkInteractions(request));
     }
 }

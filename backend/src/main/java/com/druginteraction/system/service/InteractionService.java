@@ -1,6 +1,8 @@
 package com.druginteraction.system.service;
 
 import com.druginteraction.system.dto.CheckInteractionRequest;
+import com.druginteraction.system.dto.DuplicateTherapyResponse;
+import com.druginteraction.system.dto.InteractionCheckResponse;
 import com.druginteraction.system.dto.InteractionRequest;
 import com.druginteraction.system.dto.InteractionResponse;
 import com.druginteraction.system.entity.Drug;
@@ -11,7 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,6 +29,18 @@ import java.util.stream.Collectors;
 @Transactional
 public class InteractionService {
 
+    /** Most severe first, so the riskiest pair is always at the top. */
+    private static final Map<Severity, Integer> SEVERITY_RANK = new LinkedHashMap<>();
+
+    static {
+        SEVERITY_RANK.put(Severity.HIGH, 0);
+        SEVERITY_RANK.put(Severity.MEDIUM, 1);
+        SEVERITY_RANK.put(Severity.LOW, 2);
+    }
+
+    private static final Comparator<InteractionResponse> SEVERITY_ORDER =
+            Comparator.comparingInt(response -> SEVERITY_RANK.getOrDefault(response.getSeverity(), 3));
+
     private final InteractionRepository interactionRepository;
     private final DrugService drugService;
 
@@ -31,41 +49,49 @@ public class InteractionService {
         this.drugService = drugService;
     }
 
-    /**
-     * Get all interactions.
-     * 
-     * @return List of all interactions
-     */
     @Transactional(readOnly = true)
     public List<InteractionResponse> getAllInteractions() {
-        return interactionRepository.findAll().stream()
-                .map(InteractionResponse::fromEntity)
-                .collect(Collectors.toList());
+        return toSortedUniqueResponses(interactionRepository.findAll());
+    }
+
+    @Transactional(readOnly = true)
+    public List<InteractionResponse> getInteractionsBySeverity(Severity severity) {
+        return toSortedUniqueResponses(interactionRepository.findBySeverity(severity));
     }
 
     /**
-     * Get interactions by severity level.
-     * 
-     * @param severity The severity level
-     * @return List of interactions with the given severity
+     * Filter the reference library by free text and optionally by severity.
+     * Matching runs over both drug names, the class names, the summary and the
+     * mechanism, so "NSAID" or "bleeding" both find relevant pairs.
      */
     @Transactional(readOnly = true)
-    public List<InteractionResponse> getInteractionsBySeverity(Severity severity) {
-        return interactionRepository.findBySeverity(severity).stream()
-                .map(InteractionResponse::fromEntity)
+    public List<InteractionResponse> searchInteractions(String query, Severity severity) {
+        String needle = query == null ? "" : query.trim().toLowerCase(Locale.ROOT);
+
+        return toSortedUniqueResponses(interactionRepository.findAll()).stream()
+                .filter(response -> severity == null || response.getSeverity() == severity)
+                .filter(response -> needle.isEmpty() || matches(response, needle))
                 .collect(Collectors.toList());
+    }
+
+    private boolean matches(InteractionResponse response, String needle) {
+        return contains(response.getDrug1(), needle)
+                || contains(response.getDrug2(), needle)
+                || contains(response.getDescription(), needle)
+                || contains(response.getMechanism(), needle)
+                || contains(response.getManagement(), needle);
+    }
+
+    private boolean contains(String value, String needle) {
+        return value != null && value.toLowerCase(Locale.ROOT).contains(needle);
     }
 
     /**
      * Add a new interaction.
-     * 
-     * @param request The interaction request
-     * @return The created interaction response
-     * @throws IllegalArgumentException if drugs not found or interaction already
-     *                                  exists
+     *
+     * @throws IllegalArgumentException if drugs are missing or the pair exists
      */
     public InteractionResponse addInteraction(InteractionRequest request) {
-        // Find drugs by name
         Drug drug1 = drugService.getDrugByName(request.getDrug1Name());
         Drug drug2 = drugService.getDrugByName(request.getDrug2Name());
 
@@ -79,60 +105,108 @@ public class InteractionService {
             throw new IllegalArgumentException("Cannot create interaction between a drug and itself");
         }
 
-        // Check if interaction already exists
         Optional<Interaction> existingInteraction = interactionRepository
                 .findInteractionBetweenDrugs(drug1, drug2);
         if (existingInteraction.isPresent()) {
-            throw new IllegalArgumentException("Interaction between " + request.getDrug1Name() +
-                    " and " + request.getDrug2Name() + " already exists");
+            throw new IllegalArgumentException("Interaction between " + drug1.getName() +
+                    " and " + drug2.getName() + " already exists");
         }
 
-        Interaction interaction = new Interaction(drug1, drug2, request.getSeverity(), request.getDescription());
-        Interaction savedInteraction = interactionRepository.save(interaction);
-        return InteractionResponse.fromEntity(savedInteraction);
+        Interaction interaction = new Interaction(
+                drug1,
+                drug2,
+                request.getSeverity(),
+                request.getDescription().trim(),
+                trimToNull(request.getMechanism()),
+                trimToNull(request.getManagement()),
+                trimToNull(request.getEvidence()));
+        return InteractionResponse.fromEntity(interactionRepository.save(interaction));
     }
 
     /**
-     * Check interactions for a list of drugs (MAIN FEATURE).
-     * Compares all possible pairs and returns matching interactions.
-     * 
-     * @param request The check interaction request containing drug names
-     * @return List of found interactions
+     * Check a regimen (MAIN FEATURE). Returns pairwise interactions, the names
+     * that resolved, the names that did not, and any duplicated drug classes.
      */
     @Transactional(readOnly = true)
-    public List<InteractionResponse> checkInteractions(CheckInteractionRequest request) {
-        List<String> drugNames = request.getDrugs();
+    public InteractionCheckResponse checkInteractions(CheckInteractionRequest request) {
+        List<String> submittedNames = request.getDrugs() == null ? List.of() : request.getDrugs();
 
-        if (drugNames == null || drugNames.size() < 2) {
-            return new ArrayList<>();
+        // Trim, drop blanks and collapse case-insensitive duplicates.
+        Map<String, String> uniqueNames = new LinkedHashMap<>();
+        for (String submitted : submittedNames) {
+            if (submitted == null) {
+                continue;
+            }
+            String name = submitted.trim();
+            if (!name.isEmpty()) {
+                uniqueNames.putIfAbsent(name.toLowerCase(Locale.ROOT), name);
+            }
         }
 
-        // Get all drugs and filter out any that don't exist
-        List<Drug> drugs = drugService.getDrugsByNames(drugNames);
-
-        if (drugs.size() < 2) {
-            return new ArrayList<>();
+        if (uniqueNames.size() < 2) {
+            return new InteractionCheckResponse(
+                    List.of(), List.copyOf(uniqueNames.values()), List.of(), List.of());
         }
 
-        // Extract drug IDs for bulk query
-        List<Long> drugIds = drugs.stream()
+        List<Drug> drugs = drugService.getDrugsByNames(List.copyOf(uniqueNames.values()));
+
+        Map<String, Drug> resolved = new LinkedHashMap<>();
+        for (Drug drug : drugs) {
+            resolved.putIfAbsent(drug.getName().toLowerCase(Locale.ROOT), drug);
+        }
+
+        List<String> checkedDrugs = resolved.values().stream()
+                .map(Drug::getName)
+                .sorted(String.CASE_INSENSITIVE_ORDER)
+                .collect(Collectors.toList());
+
+        List<String> unknownDrugs = uniqueNames.entrySet().stream()
+                .filter(entry -> !resolved.containsKey(entry.getKey()))
+                .map(Map.Entry::getValue)
+                .collect(Collectors.toList());
+
+        List<DuplicateTherapyResponse> duplicateTherapies = findDuplicateTherapies(resolved.values());
+
+        if (resolved.size() < 2) {
+            return new InteractionCheckResponse(
+                    List.of(), checkedDrugs, unknownDrugs, duplicateTherapies);
+        }
+
+        List<Long> drugIds = resolved.values().stream()
                 .map(Drug::getId)
                 .collect(Collectors.toList());
 
-        // Use bulk query to get all interactions among these drugs
         List<Interaction> foundInteractions = interactionRepository.findInteractionsAmongDrugs(drugIds);
 
-        return foundInteractions.stream()
-                .map(InteractionResponse::fromEntity)
-                .collect(Collectors.toList());
+        return new InteractionCheckResponse(
+                toSortedUniqueResponses(foundInteractions),
+                checkedDrugs,
+                unknownDrugs,
+                duplicateTherapies);
     }
 
     /**
-     * Delete an interaction by ID.
-     * 
-     * @param id The interaction ID
-     * @return true if deleted, false if not found
+     * Group resolved drugs by class and keep the classes with more than one
+     * member. Case and whitespace differences are ignored.
      */
+    private List<DuplicateTherapyResponse> findDuplicateTherapies(Iterable<Drug> drugs) {
+        Map<String, List<String>> byClass = new LinkedHashMap<>();
+
+        for (Drug drug : drugs) {
+            String drugClass = drug.getDrugClass();
+            if (drugClass == null || drugClass.isBlank()) {
+                continue;
+            }
+            String key = drugClass.trim();
+            byClass.computeIfAbsent(key, ignored -> new ArrayList<>()).add(drug.getName());
+        }
+
+        return byClass.entrySet().stream()
+                .filter(entry -> entry.getValue().size() > 1)
+                .map(entry -> new DuplicateTherapyResponse(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
     public boolean deleteInteraction(Long id) {
         if (interactionRepository.existsById(id)) {
             interactionRepository.deleteById(id);
@@ -141,16 +215,45 @@ public class InteractionService {
         return false;
     }
 
-    /**
-     * Get an interaction by ID.
-     * 
-     * @param id The interaction ID
-     * @return The interaction response or null if not found
-     */
     @Transactional(readOnly = true)
     public InteractionResponse getInteractionById(Long id) {
         return interactionRepository.findById(id)
                 .map(InteractionResponse::fromEntity)
                 .orElse(null);
+    }
+
+    /**
+     * Convert entities to responses, collapsing duplicate pairs and sorting
+     * from HIGH to LOW severity.
+     */
+    private List<InteractionResponse> toSortedUniqueResponses(List<Interaction> interactions) {
+        Map<String, InteractionResponse> byPair = new LinkedHashMap<>();
+
+        for (Interaction interaction : interactions) {
+            String name1 = interaction.getDrug1().getName();
+            String name2 = interaction.getDrug2().getName();
+            byPair.putIfAbsent(pairKey(name1, name2), InteractionResponse.fromEntity(interaction));
+        }
+
+        List<InteractionResponse> responses = new ArrayList<>(byPair.values());
+        responses.sort(SEVERITY_ORDER.thenComparing(
+                response -> response.getDrug1() + "|" + response.getDrug2(),
+                String.CASE_INSENSITIVE_ORDER));
+        return responses;
+    }
+
+    /** Direction-independent key so A+B and B+A are the same pair. */
+    private String pairKey(String name1, String name2) {
+        String first = name1.toLowerCase(Locale.ROOT);
+        String second = name2.toLowerCase(Locale.ROOT);
+        return first.compareTo(second) <= 0 ? first + "|" + second : second + "|" + first;
+    }
+
+    private String trimToNull(String value) {
+        if (value == null) {
+            return null;
+        }
+        String trimmed = value.trim();
+        return trimmed.isEmpty() ? null : trimmed;
     }
 }

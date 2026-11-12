@@ -23,19 +23,18 @@ public class InteractionRequest {
     @Size(max = 1000, message = "Description must not exceed 1000 characters")
     private String description;
 
-    // Default constructor
+    @Size(max = 1000, message = "Mechanism must not exceed 1000 characters")
+    private String mechanism;
+
+    @Size(max = 1000, message = "Management must not exceed 1000 characters")
+    private String management;
+
+    @Size(max = 40, message = "Evidence must not exceed 40 characters")
+    private String evidence;
+
     public InteractionRequest() {
     }
 
-    // Parameterized constructor
-    public InteractionRequest(String drug1Name, String drug2Name, Severity severity, String description) {
-        this.drug1Name = drug1Name;
-        this.drug2Name = drug2Name;
-        this.severity = severity;
-        this.description = description;
-    }
-
-    // Getters and Setters
     public String getDrug1Name() {
         return drug1Name;
     }
@@ -66,5 +65,29 @@ public class InteractionRequest {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getMechanism() {
+        return mechanism;
+    }
+
+    public void setMechanism(String mechanism) {
+        this.mechanism = mechanism;
+    }
+
+    public String getManagement() {
+        return management;
+    }
+
+    public void setManagement(String management) {
+        this.management = management;
+    }
+
+    public String getEvidence() {
+        return evidence;
+    }
+
+    public void setEvidence(String evidence) {
+        this.evidence = evidence;
     }
 }
