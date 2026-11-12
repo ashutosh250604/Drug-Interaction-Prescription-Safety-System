@@ -3,25 +3,26 @@
    Flat surfaces, one accent, density over decoration.
    ========================================================================= */
 :root {
-  --canvas: #f6f6f3;
-  --surface: #ffffff;
-  --ink: #14181b;
-  --ink-2: #3e474e;
-  --muted: #6b757d;
-  --line: #e3e4df;
-  --line-strong: #cdcfc8;
-  --accent: #14532d;
-  --accent-hover: #166534;
-  --accent-soft: #eef3ef;
-  --high: #b42318;
-  --high-bg: #fdf3f2;
-  --medium: #96540d;
-  --medium-bg: #fdf9f1;
-  --low: #166534;
-  --low-bg: #f2f8f3;
-  --ring: rgba(20, 83, 45, 0.22);
-  --radius: 10px;
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --canvas: #f6f1e8;
+  --surface: #fffdf9;
+  --surface-sunk: #faf5ec;
+  --ink: #241f1a;
+  --ink-2: #4a4238;
+  --muted: #7b7065;
+  --line: #e8dfd1;
+  --line-strong: #d5c8b5;
+  --accent: #46603f;
+  --accent-hover: #3a5234;
+  --accent-soft: #eef1e6;
+  --high: #a33d2c;
+  --high-bg: #fbeee9;
+  --medium: #8a5a1e;
+  --medium-bg: #fbf3e4;
+  --low: #4c6b4f;
+  --low-bg: #eef3ea;
+  --ring: rgba(70, 96, 63, 0.25);
+  --radius: 14px;
 }
 
 * {
@@ -30,17 +31,15 @@
 
 body {
   margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
   background: var(--canvas);
   color: var(--ink);
-  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.55;
-  -webkit-font-smoothing: antialiased;
+  font-size: 15.5px;
+  line-height: 1.6;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   line-height: 1.25;
   letter-spacing: -0.015em;
 }
@@ -86,7 +85,8 @@ a {
   position: sticky;
   top: 0;
   z-index: 60;
-  background: var(--surface);
+  background: rgba(255, 253, 249, 0.94);
+  backdrop-filter: saturate(140%) blur(6px);
   border-bottom: 1px solid var(--line);
 }
 
@@ -116,8 +116,9 @@ a {
 }
 
 .brand-name {
-  font-size: 15px;
   font-weight: 650;
+  font-size: 17px;
+  letter-spacing: -0.01em;
 }
 
 .main-nav {
@@ -130,8 +131,8 @@ a {
   padding: 18px 0;
   border-bottom: 2px solid transparent;
   color: var(--muted);
-  font-size: 14px;
   text-decoration: none;
+  font-size: 14px;
 }
 
 .nav-link:hover {
@@ -179,16 +180,17 @@ a {
 
 .page-head h1 {
   margin: 0 0 8px;
-  font-size: clamp(28px, 3.2vw, 38px);
-  letter-spacing: -0.022em;
   text-wrap: balance;
+  font-size: clamp(32px, 3.6vw, 42px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .page-lede {
-  max-width: 62ch;
-  color: var(--ink-2);
-  font-size: 15.5px;
   line-height: 1.5;
+  color: var(--ink-2);
+  font-size: 16px;
+  max-width: 58ch;
 }
 
 .workspace {
@@ -207,10 +209,11 @@ a {
 
 .panel {
   min-width: 0;
-  padding: 22px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: 0 1px 0 rgba(36, 31, 26, 0.03);
 }
 
 .panel-head {
@@ -223,9 +226,9 @@ a {
 
 .panel-head h2 {
   margin: 0;
-  font-size: 17px;
   font-weight: 650;
   letter-spacing: -0.01em;
+  font-size: 19px;
 }
 
 .panel-meta {
@@ -240,16 +243,18 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 38px;
   padding: 0 14px;
   border: 1px solid transparent;
-  border-radius: 8px;
   font: inherit;
-  font-size: 14px;
-  font-weight: 550;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s var(--ease);
+  height: 42px;
+  border-radius: 9px;
+  font-size: 14.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 0.16s var(--ease), border-color 0.16s var(--ease),
+    color 0.16s var(--ease);
 }
 
 .btn:active:not(:disabled) {
@@ -261,19 +266,17 @@ a {
 }
 
 .btn-primary:disabled {
-  background: #e9eae5;
-  color: #7d837d;
+  background: #ece4d7;
+  color: #a4988a;
 }
 
-.btn-ghost:disabled,
-.btn-secondary:disabled,
-.btn-danger:disabled {
+.btn-ghost:disabled, .btn-secondary:disabled, .btn-danger:disabled {
   opacity: 0.55;
 }
 
 .btn-primary {
-  background: var(--accent);
   color: #fff;
+  background: var(--accent);
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -281,9 +284,9 @@ a {
 }
 
 .btn-secondary {
+  color: var(--ink);
   background: var(--surface);
   border-color: var(--line-strong);
-  color: var(--ink);
 }
 
 .btn-ghost {
@@ -292,13 +295,13 @@ a {
 }
 
 .btn-ghost:hover:not(:disabled) {
-  background: #f0f1ec;
+  background: var(--surface-sunk);
 }
 
 .btn-danger {
   background: transparent;
-  border-color: #e6c9c6;
   color: var(--high);
+  border-color: #e5c8bf;
 }
 
 .btn-danger:hover:not(:disabled) {
@@ -320,16 +323,18 @@ a {
   padding: 0;
   background: none;
   border: none;
-  color: var(--muted);
   font: inherit;
   font-size: 13px;
   text-decoration: underline;
   text-underline-offset: 2px;
   cursor: pointer;
+  color: var(--muted);
+  text-decoration-color: var(--line-strong);
 }
 
 .text-button:hover {
-  color: var(--ink);
+  color: var(--accent);
+  text-decoration-color: currentColor;
 }
 
 .text-button.danger {
@@ -343,18 +348,14 @@ a {
   margin-bottom: 12px;
 }
 
-.field label,
-.field-label {
+.field label, .field-label {
   display: block;
   margin-bottom: 5px;
   color: var(--ink-2);
   font-size: 13px;
 }
 
-.field input,
-.field select,
-.field textarea,
-.input {
+.field input, .field select, .field textarea, .input {
   width: 100%;
   height: 38px;
   padding: 0 10px;
@@ -375,18 +376,13 @@ a {
   resize: vertical;
 }
 
-.field input:focus,
-.field select:focus,
-.field textarea:focus,
-.input:focus {
+.field input:focus, .field select:focus, .field textarea:focus, .input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--ring);
 }
 
-.field input:disabled,
-.field select:disabled,
-.field textarea:disabled {
+.field input:disabled, .field select:disabled, .field textarea:disabled {
   background: #f4f4f1;
   color: var(--muted);
   cursor: not-allowed;
@@ -501,8 +497,8 @@ a {
   grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 10px;
   align-items: baseline;
-  padding: 8px 0;
   border-bottom: 1px solid var(--line);
+  padding: 10px 0;
 }
 
 .regimen-item:last-child {
@@ -511,7 +507,7 @@ a {
 
 .regimen-name {
   font-size: 14px;
-  font-weight: 550;
+  font-weight: 600;
 }
 
 .regimen-class {
@@ -569,9 +565,10 @@ a {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   margin-bottom: 14px;
-  padding: 12px 0;
+  background: var(--surface-sunk);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
+  border-radius: 12px;
+  padding: 14px 4px;
 }
 
 .stat {
@@ -587,10 +584,10 @@ a {
 }
 
 .stat-value {
-  font-size: 24px;
   font-weight: 650;
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
+  font-size: 26px;
 }
 
 .stat-label {
@@ -620,12 +617,13 @@ a {
 }
 
 .interaction-card {
-  padding: 14px 16px;
+  border-left: 3px solid var(--line-strong);
+  animation: card-in 0.18s var(--ease) both;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--line-strong);
-  border-radius: var(--radius);
-  animation: card-in 0.18s var(--ease) both;
+  border-left-width: 3px;
+  border-radius: 12px;
+  padding: 18px 20px;
 }
 
 .interaction-card:nth-child(2) {
@@ -672,8 +670,8 @@ a {
 
 .pair {
   margin: 0;
-  font-size: 15px;
   font-weight: 600;
+  font-size: 17px;
 }
 
 .pair-plus {
@@ -751,8 +749,9 @@ a {
 
 .empty-findings h3 {
   margin: 0 0 6px;
-  font-size: 16px;
   font-weight: 600;
+  font-size: 19px;
+  margin-bottom: 8px;
 }
 
 .empty-findings p {
@@ -769,19 +768,25 @@ a {
 }
 
 .example {
-  height: 32px;
-  padding: 0 12px;
+  font: inherit;
+  cursor: pointer;
+  height: auto;
+  min-height: 40px;
+  padding: 9px 12px;
   background: var(--surface);
   border: 1px solid var(--line-strong);
-  border-radius: 8px;
+  border-radius: 9px;
   color: var(--ink-2);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  font-size: 13.5px;
+  line-height: 1.35;
+  white-space: normal;
+  text-align: center;
+  transition: border-color 0.16s var(--ease), color 0.16s var(--ease),
+    background-color 0.16s var(--ease);
 }
 
 .example:hover {
+  background: var(--surface-sunk);
   border-color: var(--accent);
   color: var(--accent);
 }
@@ -835,7 +840,8 @@ a {
   display: inline-flex;
   overflow: hidden;
   border: 1px solid var(--line-strong);
-  border-radius: 8px;
+  border-color: var(--line-strong);
+  border-radius: 9px;
 }
 
 .seg button {
@@ -846,8 +852,9 @@ a {
   border-left: 1px solid var(--line);
   color: var(--ink-2);
   font: inherit;
-  font-size: 13px;
   cursor: pointer;
+  border-left-color: var(--line);
+  font-size: 13px;
 }
 
 .seg button:first-child {
@@ -855,7 +862,7 @@ a {
 }
 
 .seg button[aria-pressed='true'] {
-  background: var(--ink);
+  background: var(--accent);
   color: #fff;
 }
 
@@ -873,6 +880,8 @@ a {
 
 .library-item {
   border-bottom: 1px solid var(--line);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
 }
 
 .library-item:last-child {
@@ -884,9 +893,10 @@ a {
   grid-template-columns: minmax(0, 1fr) 92px 84px 14px;
   gap: 12px;
   align-items: baseline;
-  padding: 10px 2px;
   list-style: none;
   cursor: pointer;
+  padding: 11px 4px;
+  transition: background-color 0.14s var(--ease);
 }
 
 .library-item summary::-webkit-details-marker {
@@ -918,7 +928,9 @@ a {
 }
 
 .library-body {
-  padding: 2px 0 14px;
+  padding: 4px 4px 16px;
+  background: var(--surface-sunk);
+  border-radius: 0 0 10px 10px;
 }
 
 .library-summary {
@@ -953,11 +965,13 @@ a {
 .table th {
   padding: 8px;
   border-bottom: 1px solid var(--line-strong);
-  color: var(--muted);
-  font-size: 12px;
   font-weight: 600;
   text-align: left;
   white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
 .table td {
@@ -1163,8 +1177,9 @@ a {
    ------------------------------------------------------------------------- */
 .panel-hint {
   margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--muted);
-  font-size: 12.5px;
 }
 
 .examples-block {
@@ -1205,6 +1220,8 @@ a {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   margin-top: 0;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
 }
 
 .examples-block .example {
@@ -1221,10 +1238,6 @@ a {
 
 /* Virtualize the library list: off-screen rows skip layout and paint while
    keeping their last measured height, so expanded rows stay correct. */
-.library-item {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 44px;
-}
 
 /* Keep the add-pair rail in view while a long library scrolls. */
 @media (min-width: 1001px) {
@@ -1245,95 +1258,19 @@ a {
    Warm clinical restyle
    Paper canvas, olive accent, serif headings, hairline borders.
    ========================================================================= */
-:root {
-  --canvas: #f6f1e8;
-  --surface: #fffdf9;
-  --surface-sunk: #faf5ec;
-  --ink: #241f1a;
-  --ink-2: #4a4238;
-  --muted: #7b7065;
-  --line: #e8dfd1;
-  --line-strong: #d5c8b5;
-  --accent: #46603f;
-  --accent-hover: #3a5234;
-  --accent-soft: #eef1e6;
-  --high: #a33d2c;
-  --high-bg: #fbeee9;
-  --medium: #8a5a1e;
-  --medium-bg: #fbf3e4;
-  --low: #4c6b4f;
-  --low-bg: #eef3ea;
-  --ring: rgba(70, 96, 63, 0.25);
-  --radius: 14px;
-}
 
-body {
-  background: var(--canvas);
-  color: var(--ink);
-  font-size: 15.5px;
-  line-height: 1.6;
-}
-
-h1,
-h2,
-h3,
-.brand-name {
+h1, h2, h3, .brand-name {
   font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
   font-weight: 600;
   letter-spacing: -0.012em;
 }
 
-.page-head h1 {
-  font-size: clamp(32px, 3.6vw, 42px);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.page-lede {
-  color: var(--ink-2);
-  font-size: 16px;
-  max-width: 58ch;
-}
-
 /* Header: warm surface, hairline base, calm nav */
-.app-header {
-  background: rgba(255, 253, 249, 0.94);
-  backdrop-filter: saturate(140%) blur(6px);
-  border-bottom: 1px solid var(--line);
-}
-
-.brand-name {
-  font-size: 17px;
-  letter-spacing: -0.01em;
-}
-
-.nav-link {
-  font-size: 14px;
-}
 
 /* Panels: soft paper cards with a hairline, no drop shadows */
-.panel {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: 0 1px 0 rgba(36, 31, 26, 0.03);
-}
-
-.panel-head h2 {
-  font-size: 19px;
-}
-
-.panel-hint {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--muted);
-}
 
 /* Inputs */
-.input,
-select,
-textarea {
+.input, select, textarea {
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: 9px;
@@ -1341,215 +1278,74 @@ textarea {
   font-size: 14.5px;
 }
 
-.input:hover,
-select:hover,
-textarea:hover {
+.input:hover, select:hover, textarea:hover {
   border-color: #c4b6a1;
 }
 
-.input:focus-visible,
-select:focus-visible,
-textarea:focus-visible {
+.input:focus-visible, select:focus-visible, textarea:focus-visible {
   border-color: var(--accent);
 }
 
 /* Buttons: taller, warmer, clearer states */
-.btn {
-  height: 42px;
-  border-radius: 9px;
-  font-size: 14.5px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  transition: background-color 0.16s var(--ease), border-color 0.16s var(--ease),
-    color 0.16s var(--ease);
-}
-
-.btn-primary {
-  background: var(--accent);
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
-}
-
-.btn-primary:disabled {
-  background: #ece4d7;
-  color: #a4988a;
-}
-
-.btn-secondary {
-  background: var(--surface);
-  border-color: var(--line-strong);
-}
 
 .btn-secondary:hover:not(:disabled) {
   background: var(--surface-sunk);
   border-color: #c4b6a1;
 }
 
-.btn-ghost {
-  color: var(--ink-2);
-}
-
-.btn-ghost:hover:not(:disabled) {
-  background: var(--surface-sunk);
-}
-
-.btn-danger {
-  color: var(--high);
-  border-color: #e5c8bf;
-}
-
-.btn-danger:hover:not(:disabled) {
-  background: var(--high-bg);
-}
-
-.text-button {
-  color: var(--muted);
-  text-decoration-color: var(--line-strong);
-}
-
-.text-button:hover {
-  color: var(--accent);
-  text-decoration-color: currentColor;
-}
-
 /* Known-pair chips: size to their content instead of a fixed 32px box */
-.examples-block .examples {
-  align-items: stretch;
-}
-
-.example {
-  height: auto;
-  min-height: 40px;
-  padding: 9px 12px;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 9px;
-  color: var(--ink-2);
-  font-size: 13.5px;
-  line-height: 1.35;
-  white-space: normal;
-  text-align: center;
-  transition: border-color 0.16s var(--ease), color 0.16s var(--ease),
-    background-color 0.16s var(--ease);
-}
-
-.example:hover {
-  background: var(--surface-sunk);
-  border-color: var(--accent);
-  color: var(--accent);
-}
 
 /* Regimen rows */
-.regimen-item {
-  padding: 10px 0;
-}
 
 .regimen-item + .regimen-item {
   border-top: 1px solid var(--line);
 }
 
-.regimen-name {
-  font-weight: 600;
-}
-
 /* Stats strip */
-.summary {
-  background: var(--surface-sunk);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 14px 4px;
-}
-
-.stat-value {
-  font-size: 26px;
-}
 
 /* Interaction cards: paper with a severity rule */
-.interaction-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-left-width: 3px;
-  border-radius: 12px;
-  padding: 18px 20px;
-}
-
-.interaction-card.sev-high {
-  border-left-color: var(--high);
-}
-
-.interaction-card.sev-medium {
-  border-left-color: var(--medium);
-}
-
-.interaction-card.sev-low {
-  border-left-color: var(--low);
-}
-
-.pair {
-  font-size: 17px;
-}
 
 /* Library rows */
-.library-item summary {
-  padding: 11px 4px;
-  transition: background-color 0.14s var(--ease);
-}
 
 .library-item summary:hover {
   background: var(--surface-sunk);
 }
 
-.library-body {
-  padding: 4px 4px 16px;
-  background: var(--surface-sunk);
-  border-radius: 0 0 10px 10px;
-}
-
 /* Table */
-.table th {
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
 
 .table tbody tr:hover {
   background: var(--surface-sunk);
 }
 
 /* Empty findings */
-.empty-findings h3 {
-  font-size: 19px;
-  margin-bottom: 8px;
-}
 
 .result-preview li {
   font-size: 14.5px;
 }
 
 /* Equal chip heights per row so the pair grid reads as one block */
-.examples-block .examples {
-  grid-auto-rows: 1fr;
-}
 
 /* Filter control belongs to the warm palette, not pure black */
-.seg button[aria-pressed='true'] {
-  background: var(--accent);
-  color: #fff;
-}
-
-.seg {
-  border-color: var(--line-strong);
-  border-radius: 9px;
-}
-
-.seg button {
-  border-left-color: var(--line);
-  font-size: 13px;
-}
 
 .seg button:hover:not([aria-pressed='true']) {
   background: var(--surface-sunk);
+}
+
+
+/* Touch targets: 44px minimum on coarse pointers */
+@media (pointer: coarse) {
+  .input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+
+  .btn-sm,
+  .text-button {
+    min-height: 40px;
+  }
+
+  .text-button {
+    padding: 8px 0;
+  }
 }
