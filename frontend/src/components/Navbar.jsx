@@ -1,33 +1,54 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+
+const LINKS = [
+  { to: '/', label: 'Checker', end: true },
+  { to: '/library', label: 'Interaction library' },
+  { to: '/catalogue', label: 'Drug catalogue' },
+];
 
 function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <nav className="navbar">
-      <div className="navbar-container">
-        <Link to="/" className="navbar-brand">
-          <span className="brand-icon">💊</span>
-          Drug Safety System
-        </Link>
-        <ul className="navbar-menu">
-          <li>
-            <Link to="/" className="nav-link">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link to="/add-drug" className="nav-link">
-              Add Drug
-            </Link>
-          </li>
-          <li>
-            <Link to="/add-interaction" className="nav-link">
-              Add Interaction
-            </Link>
-          </li>
-        </ul>
+    <header className="app-header">
+      <div className="header-inner">
+        <NavLink to="/" end className="brand" onClick={() => setIsOpen(false)}>
+          <svg className="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2" y="8.5" width="20" height="7" rx="3.5" fill="currentColor" />
+            <path d="M12 8.5v7" stroke="#fff" strokeWidth="1.6" />
+          </svg>
+          <span className="brand-name">Interaction Check</span>
+        </NavLink>
+
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-expanded={isOpen}
+          aria-controls="primary-nav"
+          aria-label="Menu"
+          onClick={() => setIsOpen((open) => !open)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        <nav id="primary-nav" className={`main-nav${isOpen ? ' open' : ''}`} aria-label="Primary">
+          {LINKS.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end={link.end}
+              className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+              onClick={() => setIsOpen(false)}
+            >
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
       </div>
-    </nav>
+    </header>
   );
 }
 
