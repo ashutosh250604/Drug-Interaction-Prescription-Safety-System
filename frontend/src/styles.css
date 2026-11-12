@@ -1225,3 +1225,18 @@ a {
   content-visibility: auto;
   contain-intrinsic-size: auto 44px;
 }
+
+/* Keep the add-pair rail in view while a long library scrolls. */
+@media (min-width: 1001px) {
+  .add-pair-panel {
+    position: sticky;
+    top: 76px;
+  }
+}
+
+/* On phones the collapsed rail sits above the list instead of 73 rows down. */
+@media (max-width: 1000px) {
+  .add-pair-panel {
+    order: -1;
+  }
+}

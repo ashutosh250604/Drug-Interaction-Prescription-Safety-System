@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { drugAPI, interactionAPI } from '../services/api';
 
 const SEVERITIES = ['', 'HIGH', 'MEDIUM', 'LOW'];
@@ -28,6 +28,7 @@ function LibraryPage() {
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const firstFieldRef = useRef(null);
 
   const load = async () => {
     try {
@@ -48,6 +49,10 @@ function LibraryPage() {
   useEffect(() => {
     load();
   }, []);
+
+  useEffect(() => {
+    if (isFormOpen) firstFieldRef.current?.focus();
+  }, [isFormOpen]);
 
   const severityCounts = useMemo(() => {
     const base = { HIGH: 0, MEDIUM: 0, LOW: 0 };
@@ -204,7 +209,7 @@ function LibraryPage() {
           )}
         </section>
 
-        <section className="panel" aria-label="Add interaction">
+        <section className="panel add-pair-panel" aria-label="Add interaction">
           <div className="panel-head">
             <h2>Add a pair</h2>
             <button
@@ -235,6 +240,7 @@ function LibraryPage() {
             <div className="field">
               <label htmlFor="drug1Name">Drug A</label>
               <select
+                ref={firstFieldRef}
                 id="drug1Name"
                 name="drug1Name"
                 value={form.drug1Name}
