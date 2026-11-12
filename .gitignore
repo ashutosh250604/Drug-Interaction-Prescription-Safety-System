@@ -96,3 +96,10 @@ build/
 *.sql.local
 application-local.properties
 application-local.yml
+
+# Local environment (holds DB credentials)
+backend/.env.local
+.env.local
+
+# Rotated MySQL root credential handoff
+.mysql-root.local

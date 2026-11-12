@@ -1,0 +1,5 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.druginteraction.system.config.DatabasePasswordEnvironmentPostProcessor
+
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+com.druginteraction.system.config.MissingDatabasePasswordFailureAnalyzer
