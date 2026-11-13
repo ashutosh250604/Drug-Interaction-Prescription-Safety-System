@@ -140,7 +140,7 @@ function CataloguePage() {
           )}
         </section>
 
-        <section className="panel" aria-label="Add medication">
+        <section className="panel add-med-panel" aria-label="Add medication">
           <div className="panel-head">
             <h2>Add a medication</h2>
           </div>
