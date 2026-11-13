@@ -150,9 +150,13 @@ a {
 .nav-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 4px;
+  width: 44px;
+  height: 44px;
   margin-left: auto;
-  padding: 8px;
+  padding: 0;
   background: none;
   border: 1px solid var(--line-strong);
   border-radius: 8px;
@@ -1072,11 +1076,6 @@ a {
   .input-row {
     flex-direction: column;
   }
-
-  /* Match the library: the add form leads instead of sitting below 40 rows. */
-  .add-med-panel {
-    order: -1;
-  }
 }
 
 @media (max-width: 720px) {
@@ -1143,11 +1142,22 @@ a {
 
   .table {
     font-size: 13px;
+    table-layout: fixed;
   }
 
   .table th,
   .table td {
     padding: 8px 6px;
+  }
+
+  /* Long generic names wrap instead of widening the table past the card. */
+  .cell-name {
+    white-space: normal;
+  }
+
+  .table th:last-child,
+  .cell-action {
+    width: 60px;
   }
 
   .cell-name {
@@ -1289,9 +1299,9 @@ a {
   }
 }
 
-/* On phones the collapsed rail sits above the list instead of 73 rows down. */
+/* The add panel is last in the DOM but leads on phones, above the long list. */
 @media (max-width: 1000px) {
-  .add-pair-panel {
+  .split > .panel:last-child {
     order: -1;
   }
 }
