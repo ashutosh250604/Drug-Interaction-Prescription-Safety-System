@@ -586,6 +586,68 @@ a {
   margin-top: 8px;
 }
 
+/* Repeated therapy is a finding, not a form error, so it gets its own block. */
+.duplicate-block {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--medium);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.duplicate-block h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.duplicate-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.duplicate-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.duplicate-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.duplicate-item-head {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 14.5px;
+}
+
+.duplicate-item p {
+  margin: 3px 0 0;
+  color: var(--ink-2);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.duplicate-tag {
+  padding: 1px 7px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 /* -------------------------------------------------------------------------
    Findings
    ------------------------------------------------------------------------- */

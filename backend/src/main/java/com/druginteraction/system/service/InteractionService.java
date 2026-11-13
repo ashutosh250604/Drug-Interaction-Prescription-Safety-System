@@ -43,6 +43,7 @@ public class InteractionService {
 
     private final InteractionRepository interactionRepository;
     private final DrugService drugService;
+    private final DuplicateTherapyDetector duplicateTherapyDetector = new DuplicateTherapyDetector();
 
     public InteractionService(InteractionRepository interactionRepository, DrugService drugService) {
         this.interactionRepository = interactionRepository;
@@ -186,25 +187,14 @@ public class InteractionService {
     }
 
     /**
-     * Group resolved drugs by class and keep the classes with more than one
-     * member. Case and whitespace differences are ignored.
+     * Report repeated therapy using the curated rules in
+     * {@link DuplicateTherapyDetector}. Raw class equality is not enough: some
+     * repeats are deliberate and others are errors.
      */
     private List<DuplicateTherapyResponse> findDuplicateTherapies(Iterable<Drug> drugs) {
-        Map<String, List<String>> byClass = new LinkedHashMap<>();
-
-        for (Drug drug : drugs) {
-            String drugClass = drug.getDrugClass();
-            if (drugClass == null || drugClass.isBlank()) {
-                continue;
-            }
-            String key = drugClass.trim();
-            byClass.computeIfAbsent(key, ignored -> new ArrayList<>()).add(drug.getName());
-        }
-
-        return byClass.entrySet().stream()
-                .filter(entry -> entry.getValue().size() > 1)
-                .map(entry -> new DuplicateTherapyResponse(entry.getKey(), entry.getValue()))
-                .collect(Collectors.toList());
+        List<Drug> resolved = new ArrayList<>();
+        drugs.forEach(resolved::add);
+        return duplicateTherapyDetector.detect(resolved);
     }
 
     public boolean deleteInteraction(Long id) {

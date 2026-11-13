@@ -217,15 +217,40 @@ function CheckerPage() {
               )}
 
               {duplicates.length > 0 && (
-                <div className="notice notice-warning">
-                  <strong>Duplicate therapy</strong>
-                  {duplicates.map((entry) => (
-                    <p key={entry.drugClass}>
-                      {entry.drugs.join(' and ')} are both {entry.drugClass.toLowerCase()}s.
-                      Review whether both are needed.
-                    </p>
-                  ))}
-                </div>
+                <section className="duplicate-block" aria-labelledby="duplicate-therapy-heading">
+                  <div className="duplicate-head">
+                    <h3 id="duplicate-therapy-heading">Duplicate therapy</h3>
+                    <span className="duplicate-count">
+                      {duplicates.length} {duplicates.length === 1 ? 'class' : 'classes'}
+                    </span>
+                  </div>
+                  <ul className="duplicate-list">
+                    {duplicates.map((entry) => {
+                      const severity = (entry.severity || 'MEDIUM').toLowerCase();
+                      return (
+                        <li
+                          className="duplicate-item"
+                          key={`${entry.drugClass}-${entry.drugs.join('|')}`}
+                        >
+                          <div className="duplicate-item-head">
+                            <span className={`severity-tag sev-${severity}`}>
+                              <span className="dot" aria-hidden="true" />
+                              {entry.severity || 'REVIEW'}
+                            </span>
+                            <strong>{entry.drugs.join(' + ')}</strong>
+                            {entry.oftenIntentional && (
+                              <span className="duplicate-tag">often intentional</span>
+                            )}
+                          </div>
+                          <p>
+                            {entry.message ||
+                              `${entry.drugClass} appears more than once in this regimen.`}
+                          </p>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </section>
               )}
 
               <InteractionResult

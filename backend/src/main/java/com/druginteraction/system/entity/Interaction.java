@@ -51,6 +51,14 @@ public class Interaction {
     @Column(name = "evidence", length = 40)
     private String evidence;
 
+    /**
+     * Where the row came from: CURATED for the hand-written set, DDINTER for
+     * imported data. Curated rows are never overwritten by an import.
+     */
+    @Size(max = 20, message = "Source must not exceed 20 characters")
+    @Column(name = "source", length = 20)
+    private String source = "CURATED";
+
     // Default constructor required by JPA
     public Interaction() {
     }
@@ -121,6 +129,14 @@ public class Interaction {
 
     public void setManagement(String management) {
         this.management = management;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 
     public String getEvidence() {
