@@ -1150,18 +1150,70 @@ a {
     padding: 8px 6px;
   }
 
-  /* Long generic names wrap instead of widening the table past the card. */
+  /* Long generic names wrap or break instead of widening the table. */
   .cell-name {
     white-space: normal;
+  }
+
+  .table td {
+    overflow-wrap: anywhere;
+  }
+
+  /* Phones: stack each row so long generic names never break mid-word. */
+  @media (max-width: 400px) {
+    .seg button {
+      padding: 0 7px;
+    }
+
+    .table thead {
+      display: none;
+    }
+
+    .table,
+    .table tbody {
+      display: block;
+    }
+
+    .table tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        'name action'
+        'class class';
+      gap: 1px 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .table td {
+      padding: 0;
+      border: 0;
+    }
+
+    .table td.cell-name {
+      grid-area: name;
+      font-size: 14px;
+    }
+
+    .table td:nth-child(2) {
+      grid-area: class;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+
+    .table td.cell-action {
+      grid-area: action;
+      align-self: start;
+    }
+
+    .table tr:last-child {
+      border-bottom: none;
+    }
   }
 
   .table th:last-child,
   .cell-action {
     width: 60px;
-  }
-
-  .cell-name {
-    white-space: normal;
   }
 
   .btn-sm {
@@ -1291,6 +1343,8 @@ a {
   }
 }
 
+
+
 /* Keep the add-pair rail in view while a long library scrolls. */
 @media (min-width: 1001px) {
   .add-pair-panel {
@@ -1303,6 +1357,13 @@ a {
 @media (max-width: 1000px) {
   .split > .panel:last-child {
     order: -1;
+  }
+}
+
+/* Below 360px the filter counts no longer fit beside their labels. */
+@media (max-width: 360px) {
+  .seg-count {
+    display: none;
   }
 }
 
