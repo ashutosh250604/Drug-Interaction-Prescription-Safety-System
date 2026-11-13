@@ -91,7 +91,7 @@ function CataloguePage() {
               className="input search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Filter by name, class or use"
+              placeholder="Filter by name, class or use…"
               aria-label="Filter medications"
             />
           </div>

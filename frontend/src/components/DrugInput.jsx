@@ -126,7 +126,7 @@ function DrugInput({ drugs, setDrugs, availableDrugs = [], disabled = false }) {
           onKeyDown={handleKeyDown}
           onFocus={() => setIsOpen(true)}
           onBlur={() => window.setTimeout(() => setIsOpen(false), 120)}
-          placeholder="Search by name or class"
+          placeholder="Search by name or class…"
           autoComplete="off"
           role="combobox"
           aria-expanded={showList}

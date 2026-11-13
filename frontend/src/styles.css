@@ -9,7 +9,7 @@
   --surface-sunk: #faf5ec;
   --ink: #241f1a;
   --ink-2: #4a4238;
-  --muted: #7b7065;
+  --muted: #756a5e;
   --line: #e8dfd1;
   --line-strong: #d5c8b5;
   --accent: #46603f;
@@ -40,8 +40,10 @@ body {
 }
 
 h1, h2, h3 {
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-weight: 600;
   line-height: 1.25;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.012em;
 }
 
 p {
@@ -116,9 +118,10 @@ a {
 }
 
 .brand-name {
-  font-weight: 650;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  font-weight: 600;
   font-size: 17px;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
 }
 
 .main-nav {
@@ -289,6 +292,11 @@ a {
   border-color: var(--line-strong);
 }
 
+.btn-secondary:hover:not(:disabled) {
+  background: var(--surface-sunk);
+  border-color: #c4b6a1;
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--ink-2);
@@ -386,6 +394,22 @@ a {
   background: #f4f4f1;
   color: var(--muted);
   cursor: not-allowed;
+}
+
+.input, select, textarea {
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  color: var(--ink);
+  font-size: 14.5px;
+}
+
+.input:hover, select:hover, textarea:hover {
+  border-color: #c4b6a1;
+}
+
+.input:focus-visible, select:focus-visible, textarea:focus-visible {
+  border-color: var(--accent);
 }
 
 .field-row {
@@ -499,6 +523,10 @@ a {
   align-items: baseline;
   border-bottom: 1px solid var(--line);
   padding: 10px 0;
+}
+
+.regimen-item + .regimen-item {
+  border-top: 1px solid var(--line);
 }
 
 .regimen-item:last-child {
@@ -866,6 +894,10 @@ a {
   color: #fff;
 }
 
+.seg button:hover:not([aria-pressed='true']) {
+  background: var(--surface-sunk);
+}
+
 .result-count {
   margin-bottom: 6px;
   color: var(--muted);
@@ -910,6 +942,10 @@ a {
   line-height: 1;
   transform: rotate(90deg);
   transition: transform 0.15s var(--ease);
+}
+
+.library-item summary:hover {
+  background: var(--surface-sunk);
 }
 
 .library-item details[open] summary::after {
@@ -978,6 +1014,10 @@ a {
   padding: 9px 8px;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
+}
+
+.table tbody tr:hover {
+  background: var(--surface-sunk);
 }
 
 .table tr:last-child td {
@@ -1200,6 +1240,10 @@ a {
   font-size: 14px;
 }
 
+.result-preview li {
+  font-size: 14.5px;
+}
+
 .result-preview li::marker {
   color: var(--line-strong);
 }
@@ -1236,9 +1280,6 @@ a {
   }
 }
 
-/* Virtualize the library list: off-screen rows skip layout and paint while
-   keeping their last measured height, so expanded rows stay correct. */
-
 /* Keep the add-pair rail in view while a long library scrolls. */
 @media (min-width: 1001px) {
   .add-pair-panel {
@@ -1253,84 +1294,6 @@ a {
     order: -1;
   }
 }
-
-/* =========================================================================
-   Warm clinical restyle
-   Paper canvas, olive accent, serif headings, hairline borders.
-   ========================================================================= */
-
-h1, h2, h3, .brand-name {
-  font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.012em;
-}
-
-/* Header: warm surface, hairline base, calm nav */
-
-/* Panels: soft paper cards with a hairline, no drop shadows */
-
-/* Inputs */
-.input, select, textarea {
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 9px;
-  color: var(--ink);
-  font-size: 14.5px;
-}
-
-.input:hover, select:hover, textarea:hover {
-  border-color: #c4b6a1;
-}
-
-.input:focus-visible, select:focus-visible, textarea:focus-visible {
-  border-color: var(--accent);
-}
-
-/* Buttons: taller, warmer, clearer states */
-
-.btn-secondary:hover:not(:disabled) {
-  background: var(--surface-sunk);
-  border-color: #c4b6a1;
-}
-
-/* Known-pair chips: size to their content instead of a fixed 32px box */
-
-/* Regimen rows */
-
-.regimen-item + .regimen-item {
-  border-top: 1px solid var(--line);
-}
-
-/* Stats strip */
-
-/* Interaction cards: paper with a severity rule */
-
-/* Library rows */
-
-.library-item summary:hover {
-  background: var(--surface-sunk);
-}
-
-/* Table */
-
-.table tbody tr:hover {
-  background: var(--surface-sunk);
-}
-
-/* Empty findings */
-
-.result-preview li {
-  font-size: 14.5px;
-}
-
-/* Equal chip heights per row so the pair grid reads as one block */
-
-/* Filter control belongs to the warm palette, not pure black */
-
-.seg button:hover:not([aria-pressed='true']) {
-  background: var(--surface-sunk);
-}
-
 
 /* Touch targets: 44px minimum on coarse pointers */
 @media (pointer: coarse) {

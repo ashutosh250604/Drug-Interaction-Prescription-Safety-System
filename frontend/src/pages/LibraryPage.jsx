@@ -129,7 +129,7 @@ function LibraryPage() {
               className="input search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
-              placeholder="Search drug, mechanism or action"
+              placeholder="Search drug, mechanism or action…"
               aria-label="Search interactions"
             />
             <div className="seg" role="group" aria-label="Filter by severity">
