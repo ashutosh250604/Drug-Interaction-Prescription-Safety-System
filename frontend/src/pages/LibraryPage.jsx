@@ -1,10 +1,15 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { drugAPI, interactionAPI } from '../services/api';
 
-const SEVERITIES = ['', 'HIGH', 'MEDIUM', 'LOW'];
+const SEVERITIES = ['', 'HIGH', 'MEDIUM', 'LOW', 'UNKNOWN'];
 
 const severityClass = (severity) =>
-  ({ HIGH: 'sev-high', MEDIUM: 'sev-medium', LOW: 'sev-low' }[severity] || 'sev-unknown');
+  ({ HIGH: 'sev-high', MEDIUM: 'sev-medium', LOW: 'sev-low', UNKNOWN: 'sev-unknown' }[
+    severity
+  ] || 'sev-unknown');
+
+const severityLabel = (severity) =>
+  ({ HIGH: 'High', MEDIUM: 'Moderate', LOW: 'Low', UNKNOWN: 'Unrated' }[severity] || severity);
 
 const EMPTY_FORM = {
   drug1Name: '',
@@ -55,7 +60,7 @@ function LibraryPage() {
   }, [isFormOpen]);
 
   const severityCounts = useMemo(() => {
-    const base = { HIGH: 0, MEDIUM: 0, LOW: 0 };
+    const base = { HIGH: 0, MEDIUM: 0, LOW: 0, UNKNOWN: 0 };
     interactions.forEach((item) => {
       if (item.severity in base) base[item.severity] += 1;
     });
@@ -140,7 +145,7 @@ function LibraryPage() {
                   aria-pressed={severity === level}
                   onClick={() => setSeverity(level)}
                 >
-                  {level || 'All'}
+                  {level ? severityLabel(level) : 'All'}
                   {!isLoading && (
                     <span className="seg-count">
                       {level ? severityCounts[level] : interactions.length}
@@ -180,7 +185,7 @@ function LibraryPage() {
                       </span>
                       <span className={`severity-tag ${severityClass(item.severity)}`}>
                         <span className="dot" aria-hidden="true" />
-                        {item.severity}
+                        {item.severity === 'UNKNOWN' ? 'UNRATED' : item.severity}
                       </span>
                       <span className="library-evidence">{item.evidence || 'Unknown'}</span>
                     </summary>
@@ -291,6 +296,7 @@ function LibraryPage() {
                   <option value="LOW">Low</option>
                   <option value="MEDIUM">Moderate</option>
                   <option value="HIGH">High</option>
+                  <option value="UNKNOWN">Unrated</option>
                 </select>
               </div>
               <div className="field">

@@ -1,14 +1,18 @@
 import React, { useMemo } from 'react';
 
-const SEVERITY_ORDER = { HIGH: 0, MEDIUM: 1, LOW: 2 };
+const SEVERITY_ORDER = { HIGH: 0, MEDIUM: 1, LOW: 2, UNKNOWN: 3 };
 
 const SEVERITY_CLASS = {
   HIGH: 'sev-high',
   MEDIUM: 'sev-medium',
   LOW: 'sev-low',
+  UNKNOWN: 'sev-unknown',
 };
 
 const severityClass = (severity) => SEVERITY_CLASS[severity] || 'sev-unknown';
+
+// "UNKNOWN" is a rating from the source, not a missing value; label it clearly.
+const severityLabel = (severity) => (severity === 'UNKNOWN' ? 'UNRATED' : severity);
 
 function InteractionResult({ interactions = [], checkedDrugs = [] }) {
   const sorted = useMemo(
@@ -49,7 +53,7 @@ function InteractionResult({ interactions = [], checkedDrugs = [] }) {
             </h3>
             <span className={`severity-tag ${severityClass(interaction.severity)}`}>
               <span className="dot" aria-hidden="true" />
-              {interaction.severity}
+              {severityLabel(interaction.severity)}
             </span>
           </div>
 

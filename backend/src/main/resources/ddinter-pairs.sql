@@ -3,11 +3,11 @@
 --
 -- Source: DDInter 2.0 (https://ddinter2.scbdd.com), downloaded 2026-11-14.
 -- Licence: CC BY-NC-SA 4.0 (attribution, non-commercial, share-alike).
--- Only graded pairs (Major/Moderate/Minor) are included; DDInter's "Unknown"
--- rows are deliberately skipped rather than guessed into a severity.
+-- Every DDInter level is included. Its "Unknown" level is kept as UNKNOWN
+-- rather than guessed into a graded severity.
 -- Existing pairs are never touched, so the curated rows in data.sql win.
 --
--- 170 pairs.
+-- 420 pairs.
 
 -- Rows created before this import are the curated set.
 UPDATE interaction SET source = 'CURATED' WHERE source IS NULL;
@@ -22,35 +22,137 @@ SELECT d1.id, d2.id, x.severity,
 FROM (
     SELECT 'Allopurinol' AS n1, 'Amoxicillin' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Levothyroxine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Allopurinol' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Allopurinol' AS n1, 'Warfarin' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Amiodarone' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Amitriptyline' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Amitriptyline' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Amitriptyline' AS n1, 'Levothyroxine' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Metformin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Amitriptyline' AS n1, 'Metronidazole' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Omeprazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amitriptyline' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Amitriptyline' AS n1, 'Warfarin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Amlodipine' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Amlodipine' AS n1, 'Aspirin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Amlodipine' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Amlodipine' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Levothyroxine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Amlodipine' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Amlodipine' AS n1, 'Warfarin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amoxicillin' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amoxicillin' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Amoxicillin' AS n1, 'Clarithromycin' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Amoxicillin' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Amoxicillin' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Aspirin' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Aspirin' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Aspirin' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Aspirin' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Aspirin' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Aspirin' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Aspirin' AS n1, 'Hydrochlorothiazide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Hydrochlorothiazide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Azathioprine' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Carbamazepine' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Carbamazepine' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Carbamazepine' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Carbamazepine' AS n1, 'Clarithromycin' AS n2, 'HIGH' AS severity
+    UNION ALL
+    SELECT 'Carbamazepine' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Carbamazepine' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Carbamazepine' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Carbamazepine' AS n1, 'Metronidazole' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -58,11 +160,17 @@ FROM (
     UNION ALL
     SELECT 'Carbamazepine' AS n1, 'Simvastatin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Ciprofloxacin' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Ciprofloxacin' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Ciprofloxacin' AS n1, 'Aspirin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Ciprofloxacin' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Ciprofloxacin' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Ciprofloxacin' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Ciprofloxacin' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -76,19 +184,39 @@ FROM (
     UNION ALL
     SELECT 'Clopidogrel' AS n1, 'Amiodarone' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Clopidogrel' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Clopidogrel' AS n1, 'Apixaban' AS n2, 'HIGH' AS severity
     UNION ALL
     SELECT 'Clopidogrel' AS n1, 'Atorvastatin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Clopidogrel' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Clopidogrel' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Clopidogrel' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Clopidogrel' AS n1, 'Hydrochlorothiazide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Clopidogrel' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Clopidogrel' AS n1, 'Naproxen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Clopidogrel' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Clopidogrel' AS n1, 'Sertraline' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Digoxin' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Digoxin' AS n1, 'Aspirin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Digoxin' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Digoxin' AS n1, 'Clarithromycin' AS n2, 'HIGH' AS severity
+    UNION ALL
+    SELECT 'Digoxin' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Digoxin' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Digoxin' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -96,9 +224,19 @@ FROM (
     UNION ALL
     SELECT 'Digoxin' AS n1, 'Methotrexate' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Digoxin' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Digoxin' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Digoxin' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Digoxin' AS n1, 'Warfarin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Fluoxetine' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Fluoxetine' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Fluoxetine' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Fluoxetine' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -108,23 +246,55 @@ FROM (
     UNION ALL
     SELECT 'Fluoxetine' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Fluoxetine' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Fluoxetine' AS n1, 'Metronidazole' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Fluoxetine' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Fluoxetine' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Fluoxetine' AS n1, 'Warfarin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Furosemide' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Furosemide' AS n1, 'Aspirin' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Furosemide' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Furosemide' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Furosemide' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Furosemide' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Furosemide' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Furosemide' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Glipizide' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Glipizide' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Glipizide' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Glipizide' AS n1, 'Sertraline' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Hydrochlorothiazide' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Hydrochlorothiazide' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Hydrochlorothiazide' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Hydrochlorothiazide' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Ibuprofen' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Ibuprofen' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Ibuprofen' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Ibuprofen' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Ibuprofen' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -156,35 +326,111 @@ FROM (
     UNION ALL
     SELECT 'Levothyroxine' AS n1, 'Amiodarone' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Levothyroxine' AS n1, 'Carbamazepine' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Levothyroxine' AS n1, 'Ciprofloxacin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Levothyroxine' AS n1, 'Fluoxetine' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Furosemide' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Levothyroxine' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Hydrochlorothiazide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Lisinopril' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Losartan' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Naproxen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Levothyroxine' AS n1, 'Simvastatin' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Levothyroxine' AS n1, 'Verapamil' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Lisinopril' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Lisinopril' AS n1, 'Aspirin' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Lisinopril' AS n1, 'Azathioprine' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Lisinopril' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Lisinopril' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Lisinopril' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Lisinopril' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Lisinopril' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Losartan' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Losartan' AS n1, 'Aspirin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Losartan' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Losartan' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Losartan' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Losartan' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Losartan' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Losartan' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Losartan' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Losartan' AS n1, 'Warfarin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Allopurinol' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Amlodipine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Carbamazepine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metformin' AS n1, 'Ciprofloxacin' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Metformin' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Metformin' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Metformin' AS n1, 'Digoxin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Fluoxetine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metformin' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -196,7 +442,17 @@ FROM (
     UNION ALL
     SELECT 'Metformin' AS n1, 'Lisinopril' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Metformin' AS n1, 'Losartan' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Metformin' AS n1, 'Naproxen' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metformin' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metformin' AS n1, 'Spironolactone' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -216,17 +472,39 @@ FROM (
     UNION ALL
     SELECT 'Methotrexate' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Furosemide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Methotrexate' AS n1, 'Hydrochlorothiazide' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Methotrexate' AS n1, 'Lisinopril' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Losartan' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Methotrexate' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Methotrexate' AS n1, 'Simvastatin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Methotrexate' AS n1, 'Verapamil' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Methotrexate' AS n1, 'Warfarin' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Metoprolol' AS n1, 'Aspirin' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metoprolol' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -234,29 +512,77 @@ FROM (
     UNION ALL
     SELECT 'Metoprolol' AS n1, 'Levothyroxine' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Metformin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Metoprolol' AS n1, 'Morphine' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Omeprazole' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metoprolol' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metoprolol' AS n1, 'Warfarin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Metronidazole' AS n1, 'Amiodarone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Metronidazole' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metronidazole' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metronidazole' AS n1, 'Atorvastatin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Metronidazole' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Metronidazole' AS n1, 'Clarithromycin' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Metronidazole' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metronidazole' AS n1, 'Hydrochlorothiazide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Metronidazole' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Metronidazole' AS n1, 'Sertraline' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Morphine' AS n1, 'Allopurinol' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Morphine' AS n1, 'Amlodipine' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Morphine' AS n1, 'Carbamazepine' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Morphine' AS n1, 'Ciprofloxacin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Morphine' AS n1, 'Clopidogrel' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Digoxin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Morphine' AS n1, 'Fluoxetine' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Morphine' AS n1, 'Furosemide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Morphine' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Morphine' AS n1, 'Hydrochlorothiazide' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Levothyroxine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Morphine' AS n1, 'Lisinopril' AS n2, 'MEDIUM' AS severity
     UNION ALL
@@ -264,23 +590,59 @@ FROM (
     UNION ALL
     SELECT 'Morphine' AS n1, 'Metformin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Morphine' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Naproxen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Omeprazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Paracetamol' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Morphine' AS n1, 'Sertraline' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Morphine' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Morphine' AS n1, 'Spironolactone' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Morphine' AS n1, 'Verapamil' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Morphine' AS n1, 'Warfarin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Naproxen' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Naproxen' AS n1, 'Apixaban' AS n2, 'HIGH' AS severity
+    UNION ALL
+    SELECT 'Naproxen' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Naproxen' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Naproxen' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Naproxen' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Naproxen' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Naproxen' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Allopurinol' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Amlodipine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Aspirin' AS n2, 'LOW' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Atorvastatin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Carbamazepine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Ciprofloxacin' AS n2, 'LOW' AS severity
     UNION ALL
@@ -288,63 +650,197 @@ FROM (
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Digoxin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Fluoxetine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Omeprazole' AS n1, 'Furosemide' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Glipizide' AS n2, 'LOW' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Hydrochlorothiazide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Lisinopril' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Losartan' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Omeprazole' AS n1, 'Methotrexate' AS n2, 'HIGH' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Naproxen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Omeprazole' AS n1, 'Simvastatin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Spironolactone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Omeprazole' AS n1, 'Verapamil' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Omeprazole' AS n1, 'Warfarin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Levothyroxine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Metformin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Paracetamol' AS n1, 'Methotrexate' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Omeprazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Paracetamol' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Paracetamol' AS n1, 'Warfarin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Prednisolone' AS n1, 'Amiodarone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Prednisolone' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Prednisolone' AS n1, 'Atorvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Prednisolone' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Prednisolone' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Prednisolone' AS n1, 'Hydrochlorothiazide' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Prednisolone' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Prednisolone' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Sertraline' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Sertraline' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Simvastatin' AS n1, 'Atorvastatin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Furosemide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Hydrochlorothiazide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Lisinopril' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Losartan' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Simvastatin' AS n1, 'Metronidazole' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Naproxen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Simvastatin' AS n1, 'Sertraline' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Simvastatin' AS n1, 'Warfarin' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Spironolactone' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Spironolactone' AS n1, 'Aspirin' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Clarithromycin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Levothyroxine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Spironolactone' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Spironolactone' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Spironolactone' AS n1, 'Warfarin' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Aspirin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Tramadol' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Tramadol' AS n1, 'Clopidogrel' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Tramadol' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Ibuprofen' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Levothyroxine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Metformin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Methotrexate' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Tramadol' AS n1, 'Metronidazole' AS n2, 'LOW' AS severity
     UNION ALL
+    SELECT 'Tramadol' AS n1, 'Omeprazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Prednisolone' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Tramadol' AS n1, 'Simvastatin' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Tramadol' AS n1, 'Warfarin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Verapamil' AS n1, 'Amoxicillin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Verapamil' AS n1, 'Apixaban' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Verapamil' AS n1, 'Aspirin' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Verapamil' AS n1, 'Azathioprine' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Verapamil' AS n1, 'Clarithromycin' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Verapamil' AS n1, 'Clopidogrel' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
+    SELECT 'Verapamil' AS n1, 'Glipizide' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Verapamil' AS n1, 'Ibuprofen' AS n2, 'MEDIUM' AS severity
     UNION ALL
+    SELECT 'Verapamil' AS n1, 'Metronidazole' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Verapamil' AS n1, 'Prednisolone' AS n2, 'MEDIUM' AS severity
+    UNION ALL
+    SELECT 'Verapamil' AS n1, 'Warfarin' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Warfarin' AS n1, 'Apixaban' AS n2, 'HIGH' AS severity
     UNION ALL
@@ -354,9 +850,13 @@ FROM (
     UNION ALL
     SELECT 'Warfarin' AS n1, 'Clopidogrel' AS n2, 'HIGH' AS severity
     UNION ALL
+    SELECT 'Warfarin' AS n1, 'Furosemide' AS n2, 'UNKNOWN' AS severity
+    UNION ALL
     SELECT 'Warfarin' AS n1, 'Glipizide' AS n2, 'MEDIUM' AS severity
     UNION ALL
     SELECT 'Warfarin' AS n1, 'Hydrochlorothiazide' AS n2, 'LOW' AS severity
+    UNION ALL
+    SELECT 'Warfarin' AS n1, 'Lisinopril' AS n2, 'UNKNOWN' AS severity
     UNION ALL
     SELECT 'Warfarin' AS n1, 'Sertraline' AS n2, 'MEDIUM' AS severity
 ) x

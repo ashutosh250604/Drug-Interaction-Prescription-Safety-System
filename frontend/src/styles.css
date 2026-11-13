@@ -21,6 +21,8 @@
   --medium-bg: #fbf3e4;
   --low: #4c6b4f;
   --low-bg: #eef3ea;
+  --unknown: #6b6359;
+  --unknown-bg: #f2efe9;
   --ring: rgba(70, 96, 63, 0.25);
   --radius: 14px;
 }
@@ -653,7 +655,7 @@ a {
    ------------------------------------------------------------------------- */
 .summary {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   margin-bottom: 14px;
   background: var(--surface-sunk);
   border: 1px solid var(--line);
@@ -697,6 +699,10 @@ a {
   color: var(--low);
 }
 
+.sev-unknown-text {
+  color: var(--unknown);
+}
+
 .findings {
   display: flex;
   flex-direction: column;
@@ -738,6 +744,10 @@ a {
 
 .interaction-card.sev-low {
   border-left-color: var(--low);
+}
+
+.interaction-card.sev-unknown {
+  border-left-color: var(--unknown);
 }
 
 @keyframes card-in {
@@ -788,6 +798,10 @@ a {
 
 .severity-tag.sev-low {
   color: var(--low);
+}
+
+.severity-tag.sev-unknown {
+  color: var(--unknown);
 }
 
 .dot {
@@ -1192,7 +1206,8 @@ a {
     gap: 10px;
   }
 
-  .stat:nth-child(3) {
+  .stat:nth-child(3),
+  .stat:nth-child(5) {
     border-left: none;
   }
 
@@ -1419,6 +1434,11 @@ a {
   .examples-block .examples {
     grid-template-columns: 1fr;
   }
+
+  /* Five filter buttons plus counts no longer fit on a narrow phone. */
+  .seg-count {
+    display: none;
+  }
 }
 
 
@@ -1438,12 +1458,6 @@ a {
   }
 }
 
-/* Below 360px the filter counts no longer fit beside their labels. */
-@media (max-width: 360px) {
-  .seg-count {
-    display: none;
-  }
-}
 
 /* Touch targets: 44px minimum on coarse pointers */
 @media (pointer: coarse) {

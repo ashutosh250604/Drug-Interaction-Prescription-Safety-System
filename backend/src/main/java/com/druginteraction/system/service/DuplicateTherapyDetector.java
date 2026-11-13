@@ -83,7 +83,8 @@ public final class DuplicateTherapyDetector {
     private static final Map<Severity, Integer> SEVERITY_RANK = Map.of(
             Severity.HIGH, 0,
             Severity.MEDIUM, 1,
-            Severity.LOW, 2);
+            Severity.LOW, 2,
+            Severity.UNKNOWN, 3);
 
     public List<DuplicateTherapyResponse> detect(Collection<Drug> drugs) {
         Map<String, List<String>> namesByClass = new LinkedHashMap<>();

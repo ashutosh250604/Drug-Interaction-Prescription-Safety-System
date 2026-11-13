@@ -29,13 +29,14 @@ import java.util.stream.Collectors;
 @Transactional
 public class InteractionService {
 
-    /** Most severe first, so the riskiest pair is always at the top. */
+    /** Most severe first; unrated pairs come last because they carry no ranking. */
     private static final Map<Severity, Integer> SEVERITY_RANK = new LinkedHashMap<>();
 
     static {
         SEVERITY_RANK.put(Severity.HIGH, 0);
         SEVERITY_RANK.put(Severity.MEDIUM, 1);
         SEVERITY_RANK.put(Severity.LOW, 2);
+        SEVERITY_RANK.put(Severity.UNKNOWN, 3);
     }
 
     private static final Comparator<InteractionResponse> SEVERITY_ORDER =
@@ -214,7 +215,7 @@ public class InteractionService {
 
     /**
      * Convert entities to responses, collapsing duplicate pairs and sorting
-     * from HIGH to LOW severity.
+     * from HIGH to UNKNOWN severity.
      */
     private List<InteractionResponse> toSortedUniqueResponses(List<Interaction> interactions) {
         Map<String, InteractionResponse> byPair = new LinkedHashMap<>();

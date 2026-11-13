@@ -14,9 +14,9 @@
  * Licence: CC BY-NC-SA 4.0. Non-commercial use only; derived data must keep
  * the same licence and attribution. Do not ship in a paid product.
  *
- * Only pairs where both drugs are already in our catalogue are emitted, only
- * graded severities (Major/Moderate/Minor) are used, and pairs already present
- * in data.sql are skipped so curated rows always win.
+ * Only pairs where both drugs are already in our catalogue are emitted, every
+ * DDInter level is kept (Unknown becomes UNKNOWN), and pairs already present in
+ * data.sql are skipped so curated rows always win.
  */
 const fs = require('fs');
 const path = require('path');
@@ -38,8 +38,8 @@ const ALIASES = {
   Metoprolol: ['Metoprolol tartrate', 'Metoprolol succinate'],
 };
 
-const RANK = { Major: 3, Moderate: 2, Minor: 1 };
-const SEVERITY = { Major: 'HIGH', Moderate: 'MEDIUM', Minor: 'LOW' };
+const RANK = { Major: 3, Moderate: 2, Minor: 1, Unknown: 0 };
+const SEVERITY = { Major: 'HIGH', Moderate: 'MEDIUM', Minor: 'LOW', Unknown: 'UNKNOWN' };
 
 const pairs = new Map();
 for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.csv'))) {
@@ -51,7 +51,7 @@ for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.csv'))) {
     const a = m[2].trim();
     const b = m[4].trim();
     const level = m[5].trim();
-    if (!RANK[level]) continue; // Unknown severity is skipped, not guessed
+    if (!(level in RANK)) continue; // Unexpected level: skip rather than guess
     const key = [a, b].sort().join(' | ');
     const prev = pairs.get(key);
     if (!prev || RANK[level] > RANK[prev.level]) pairs.set(key, { a, b, level });
@@ -74,7 +74,8 @@ const existingKeys = new Set(
   existing.map((p) => [p.drug1, p.drug2].sort().join(' | '))
 );
 
-// Only pairs where both drugs are in our catalogue matter.
+// Only pairs where both drugs are in our catalogue matter. DDInter's
+// "Unknown" level is kept as UNKNOWN, never mapped onto MEDIUM.
 const catalogue = new Set(Object.keys(ALIASES).concat(existing.flatMap((p) => [p.drug1, p.drug2])));
 const rows = [];
 const seen = new Set();
@@ -100,8 +101,8 @@ const sql = `-- DDInter 2.0 pairs for the 40 catalogue drugs.
 --
 -- Source: DDInter 2.0 (https://ddinter2.scbdd.com), downloaded 2026-11-14.
 -- Licence: CC BY-NC-SA 4.0 (attribution, non-commercial, share-alike).
--- Only graded pairs (Major/Moderate/Minor) are included; DDInter's "Unknown"
--- rows are deliberately skipped rather than guessed into a severity.
+-- Every DDInter level is included. Its "Unknown" level is kept as UNKNOWN
+-- rather than guessed into a graded severity.
 -- Existing pairs are never touched, so the curated rows in data.sql win.
 --
 -- ${rows.length} pairs.

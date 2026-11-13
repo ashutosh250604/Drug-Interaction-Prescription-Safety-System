@@ -18,5 +18,11 @@ public enum Severity {
     /**
      * High severity - Severe interaction, avoid combination
      */
-    HIGH
+    HIGH,
+
+    /**
+     * Not rated - the source lists the pair but assigns no severity. Kept
+     * separate from the graded levels so it is never read as "moderate".
+     */
+    UNKNOWN
 }

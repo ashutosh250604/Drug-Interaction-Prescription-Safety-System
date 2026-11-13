@@ -70,7 +70,7 @@ function CheckerPage() {
   };
 
   const counts = useMemo(() => {
-    const base = { HIGH: 0, MEDIUM: 0, LOW: 0 };
+    const base = { HIGH: 0, MEDIUM: 0, LOW: 0, UNKNOWN: 0 };
     (result?.interactions || []).forEach((item) => {
       if (item.severity in base) base[item.severity] += 1;
     });
@@ -203,6 +203,10 @@ function CheckerPage() {
                 <div className="stat">
                   <span className="stat-value sev-low-text">{counts.LOW}</span>
                   <span className="stat-label">minor</span>
+                </div>
+                <div className="stat">
+                  <span className="stat-value sev-unknown-text">{counts.UNKNOWN}</span>
+                  <span className="stat-label">unrated</span>
                 </div>
               </div>
 

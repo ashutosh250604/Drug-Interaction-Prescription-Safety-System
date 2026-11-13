@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Map<String, Object>> handleUnreadableBody(HttpMessageNotReadableException exception) {
         return error(HttpStatus.BAD_REQUEST,
-                "The request body could not be read. Check the field names and severity values (LOW, MEDIUM, HIGH).");
+                "The request body could not be read. Check the field names and severity values (LOW, MEDIUM, HIGH, UNKNOWN).");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
