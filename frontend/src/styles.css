@@ -399,9 +399,9 @@ a {
 .input, select, textarea {
   background: var(--surface);
   border: 1px solid var(--line-strong);
-  border-radius: 9px;
+  border-radius: 8px;
   color: var(--ink);
-  font-size: 14.5px;
+  font-size: 14px;
 }
 
 .input:hover, select:hover, textarea:hover {
@@ -523,10 +523,6 @@ a {
   align-items: baseline;
   border-bottom: 1px solid var(--line);
   padding: 10px 0;
-}
-
-.regimen-item + .regimen-item {
-  border-top: 1px solid var(--line);
 }
 
 .regimen-item:last-child {
