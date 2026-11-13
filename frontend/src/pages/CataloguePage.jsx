@@ -120,8 +120,14 @@ function CataloguePage() {
                 <tbody>
                   {visible.map((drug) => (
                     <tr key={drug.id}>
-                      <td className="cell-name">{drug.name}</td>
-                      <td>{drug.drugClass || '—'}</td>
+                      <td className="cell-name">
+                        <span className="cell-label">Medication: </span>
+                        {drug.name}
+                      </td>
+                      <td>
+                        <span className="cell-label">Class: </span>
+                        {drug.drugClass || '—'}
+                      </td>
                       <td className="cell-muted col-use">{drug.description || '—'}</td>
                       <td className="cell-action">
                         <button

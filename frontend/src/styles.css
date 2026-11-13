@@ -1039,6 +1039,12 @@ a {
   white-space: nowrap;
 }
 
+/* Stacked phone rows lose their column headers, so each cell names its column.
+   Above 400px the real headers announce it and this text stays hidden. */
+.cell-label {
+  display: none;
+}
+
 /* -------------------------------------------------------------------------
    Footer and utilities
    ------------------------------------------------------------------------- */
@@ -1159,58 +1165,6 @@ a {
     overflow-wrap: anywhere;
   }
 
-  /* Phones: stack each row so long generic names never break mid-word. */
-  @media (max-width: 400px) {
-    .seg button {
-      padding: 0 7px;
-    }
-
-    .table thead {
-      display: none;
-    }
-
-    .table,
-    .table tbody {
-      display: block;
-    }
-
-    .table tr {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        'name action'
-        'class class';
-      gap: 1px 10px;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .table td {
-      padding: 0;
-      border: 0;
-    }
-
-    .table td.cell-name {
-      grid-area: name;
-      font-size: 14px;
-    }
-
-    .table td:nth-child(2) {
-      grid-area: class;
-      color: var(--muted);
-      font-size: 12.5px;
-    }
-
-    .table td.cell-action {
-      grid-area: action;
-      align-self: start;
-    }
-
-    .table tr:last-child {
-      border-bottom: none;
-    }
-  }
-
   .table th:last-child,
   .cell-action {
     width: 60px;
@@ -1218,6 +1172,68 @@ a {
 
   .btn-sm {
     min-height: 40px;
+  }
+}
+
+/* Phones: stack each row so long generic names never break mid-word. */
+@media (max-width: 400px) {
+  .cell-label {
+    display: block;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .seg button {
+    padding: 0 7px;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table,
+  .table tbody {
+    display: block;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'name action'
+      'class class';
+    gap: 1px 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .table td {
+    padding: 0;
+    border: 0;
+  }
+
+  .table td.cell-name {
+    grid-area: name;
+    font-size: 14px;
+  }
+
+  .table td:nth-child(2) {
+    grid-area: class;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+
+  .table td.cell-action {
+    grid-area: action;
+    align-self: start;
+  }
+
+  .table tr:last-child {
+    border-bottom: none;
   }
 }
 
